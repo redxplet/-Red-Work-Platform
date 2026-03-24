@@ -13,7 +13,6 @@
         :root { --red-primary: #ff1e1e; --red-dark: #990000; --dark-bg: #0a0a0a; --glass-bg: rgba(255, 255, 255, 0.03); }
         body { font-family: 'Tajawal', sans-serif; background-color: var(--dark-bg); color: white; overflow-x: hidden; scroll-behavior: smooth; }
         
-        /* خلفية سينمائية متحركة فائقة الكثافة */
         .bg-mesh {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
             background: radial-gradient(circle at 10% 10%, #2a0000 0%, #0a0a0a 100%),
@@ -22,10 +21,9 @@
         }
         .red-glow {
             position: absolute; width: 500px; height: 500px; background: var(--red-primary);
-            filter: blur(180px); opacity: 0.12; border-radius: 50%; animation: pulse Glow 10s infinite alternate;
+            filter: blur(180px); opacity: 0.12; border-radius: 50%; animation: pulseGlow 10s infinite alternate;
         }
 
-        /* زجاجية الاستمارة المتقدمة (Glassmorphism) */
         .glass-card {
             background: var(--glass-bg);
             backdrop-filter: blur(25px);
@@ -35,7 +33,6 @@
         }
         .glass-card:hover { transform: translateY(-5px); box-shadow: 0 45px 80px -20px rgba(255, 30, 30, 0.1); }
 
-        /* حقول الإدخال "الخارقة" بتصميم Neo-Brutalism light */
         .input-group input {
             background: rgba(255, 255, 255, 0.04);
             border: 2px solid rgba(255, 255, 255, 0.05);
@@ -50,7 +47,6 @@
         }
         .input-group input::placeholder { color: rgba(255, 255, 255, 0.3); font-weight: 400; }
 
-        /* زر الإرسال التفاعلي */
         .btn-action {
             position: relative; overflow: hidden; transition: all 0.4s ease;
             background: linear-gradient(135deg, var(--red-primary) 0%, var(--red-dark) 100%);
@@ -67,14 +63,12 @@
         .btn-action:hover::after { left: 130%; }
         .btn-action:disabled { opacity: 0.6; cursor: not-allowed; transform: none; box-shadow: none; }
 
-        /* تحريكات مخصصة */
         @keyframes pulseGlow { 0% { opacity: 0.12; transform: scale(1); } 100% { opacity: 0.18; transform: scale(1.1); } }
         
-        /* نظام الإشعاراتToast المخصص */
         #toast {
             position: fixed; top: 30px; left: 50%; transform: translateX(-50%) translateY(-150px);
             padding: 18px 35px; border-radius: 20px; font-weight: 800; transition: all 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-            z-index: 1000; box-shadow: 0 20px 40px rgba(0,0,0,0.4); display: flex; items-center; gap: 12px;
+            z-index: 1000; box-shadow: 0 20px 40px rgba(0,0,0,0.4); display: flex; align-items: center; gap: 12px;
             backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1);
         }
         #toast.show { transform: translateX(-50%) translateY(0); }
@@ -91,7 +85,7 @@
     <main class="w-full max-w-7xl grid lg:grid-cols-12 gap-0 overflow-hidden rounded-[40px] glass-card border border-white/5">
         
         <div class="lg:col-span-5 hidden lg:flex flex-col justify-between p-16 bg-gradient-to-br from-red-950/30 to-black/20 border-l border-white/5 relative overflow-hidden">
-            <div class="absolute inset-0 opacity-10" style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;20&quot; height=&quot;20&quot; viewBox=&quot;0 0 20 20&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3%3Cg fill=&quot;%23ffffff&quot; fill-opacity=&quot;0.4&quot; fill-rule=&quot;evenodd&quot;%3%3Ccircle cx=&quot;3&quot; cy=&quot;3&quot; r=&quot;3&quot;/%3%3Ccircle cx=&quot;13&quot; cy=&quot;13&quot; r=&quot;3&quot;/%3%3C/g%3%3C/svg%3E');"></div>
+            <div class="absolute inset-0 opacity-10" style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;20&quot; height=&quot;20&quot; viewBox=&quot;0 0 20 20&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cg fill=&quot;%23ffffff&quot; fill-opacity=&quot;0.4&quot; fill-rule=&quot;evenodd&quot;%3E%3Ccircle cx=&quot;3&quot; cy=&quot;3&quot; r=&quot;3&quot;/%3E%3Ccircle cx=&quot;13&quot; cy=&quot;13&quot; r=&quot;3&quot;/%3E%3C/g%3E%3C/svg%3E');"></div>
             <div class="relative z-10">
                 <a href="index.html" class="text-4xl font-[900] tracking-tighter text-white mb-24 block hover:text-red-500 transition active:scale-95">
                     RED<span class="text-red-600 italic">WORK</span>
@@ -182,13 +176,11 @@
     </div>
 
     <script type="module">
-        // استيراد الدوال الحديثة من SDKs (Modular)
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getAuth, createUserWithEmailAndPassword, updateProfile } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-        import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics.js";
         import { getFirestore, doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics.js";
 
-        // إعدادات Firebase الخاصة بك (النهائية والآمنة)
         const firebaseConfig = {
             apiKey: "AIzaSyCuoWMWT_7opd6oDd5-ATnZ36Fd07L9EU0",
             authDomain: "red-work-global.firebaseapp.com",
@@ -199,14 +191,17 @@
             measurementId: "G-Q09YJD3YF2"
         };
 
-        // بدء تشغيل الأنظمة
-        console.log("%c RED WORK %c Auth System Initializing... ", "background:#dc2626; color:white; font-weight:bold", "background:black; color:white");
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
-        const analytics = getAnalytics(app);
+        
+        let analytics;
+        try {
+            analytics = getAnalytics(app);
+        } catch (e) {
+            console.warn("Analytics blocked or failed");
+        }
 
-        // عناصر الواجهة
         const signupForm = document.getElementById('signupForm');
         const toast = document.getElementById('toast');
         const toastMsg = document.getElementById('toastMsg');
@@ -214,90 +209,68 @@
         const submitBtn = document.getElementById('submitBtn');
         const passInput = document.getElementById('userPassword');
 
-        // وظيفة الإشعار الاحترافي
         function showToast(msg, type = 'error') {
             toastMsg.innerText = msg;
-            toast.className = type; // success or error
+            toast.className = type;
             toastIcon.className = type === 'error' ? 'fas fa-exclamation-circle text-2xl' : 'fas fa-check-circle text-2xl';
             toast.classList.add('show');
             setTimeout(() => toast.classList.remove('show'), 4500);
         }
 
-        // نظام التحقق اللحظي من قوة كلمة السر (UI Enhancement)
         passInput.addEventListener('input', (e) => {
             const val = e.target.value;
             const bar = document.getElementById('strengthBar');
             const text = document.getElementById('strengthText');
-            
             if(val.length === 0) { bar.style.width = '0%'; text.innerText = "أدخل 6 أحرف على الأقل."; text.style.color = '#6b7280'; }
             else if(val.length < 6) { bar.style.width = '25%'; bar.style.backgroundColor = '#ef4444'; text.innerText = "ضعيفة جداً"; text.style.color = '#ef4444'; }
             else if(val.length < 10) { bar.style.width = '60%'; bar.style.backgroundColor = '#f59e0b'; text.innerText = "متوسطة - أضف رموزاً"; text.style.color = '#f59e0b'; }
             else { bar.style.width = '100%'; bar.style.backgroundColor = '#10b981'; text.innerText = "قوية واستثنائية"; text.style.color = '#10b981'; }
         });
 
-        // معالج إرسال الاستمارة (The Core Logic)
         signupForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             
-            // جلب البيانات
             const email = document.getElementById('userEmail').value.trim();
             const pass = passInput.value;
             const name = document.getElementById('userName').value.trim();
 
-            // التحقق الأساسي قبل الإرسال
             if(pass.length < 6) { showToast("كلمة السر يجب أن تكون 6 أحرف على الأقل.", 'error'); return; }
 
-            // تأثير التحميل الاحترافي
             submitBtn.disabled = true;
             submitBtn.innerHTML = `<i class="fas fa-circle-notch animate-spin text-2xl"></i> <span>جاري إنشاء ملفك الاستثنائي...</span>`;
 
             try {
-                // 1. إنشاء الحساب في Authentication SDK
                 const userCredential = await createUserWithEmailAndPassword(auth, email, pass);
                 const user = userCredential.user;
-                console.log("Auth Success:", user.uid);
 
-                // 2. تحديث الاسم في ملف التعريف (DisplayName)
                 await updateProfile(user, { displayName: name });
 
-                // 3. تخزين بيانات المبدع الـ MetaData في Firestore ليرثها Red Clients
-                // نستخدم setDoc مع ID المستخدم لضمان التفرد
                 await setDoc(doc(db, "creators", user.uid), {
                     uid: user.uid,
                     fullName: name,
                     email: email,
                     role: "Creator Level 1",
-                    createdAt: serverTimestamp(), // وقت السيرفر لضمان الدقة
+                    createdAt: serverTimestamp(),
                     isVerified: false,
                     portfolioCompleted: false,
                     onboardingComplete: false
                 });
-                console.log("Firestore Doc Created.");
 
-                // تسجيل حدث نجاح التسجيل في Analytics
-                logEvent(analytics, 'sign_up', { method: 'email' });
+                if (analytics) logEvent(analytics, 'sign_up', { method: 'email' });
 
                 showToast("تم إنشاء حسابك بنجاح! جاري تحضير ورشة عملك...", 'success');
                 
-                // التوجيه الذكي لصفحة البروفايل بعد النجاح
-                setTimeout(() => { window.location.href = 'profile.html'; }, 2500);
+                setTimeout(() => { 
+                    window.location.href = 'login.html'; 
+                }, 2500);
 
             } catch (error) {
-                console.error("Firebase Error:", error.code, error.message);
-                
-                // ترجمة أخطاء Firebase لرسائل عربية مفهومة
-                let errorMsg = "حدث خطأ غير متوقع أثناء التسجيل.";
+                console.error("Firebase Error:", error.code);
+                let errorMsg = "حدث خطأ أثناء التسجيل.";
                 if(error.code === 'auth/email-already-in-use') errorMsg = "هذا البريد الإلكتروني مستخدم بالفعل!";
                 if(error.code === 'auth/invalid-email') errorMsg = "تنسيق البريد الإلكتروني غير صحيح!";
-                if(error.code === 'auth/weak-password') errorMsg = "كلمة السر ضعيفة جداً، اختر كلمة أقوى.";
-                if(error.code === 'auth/network-request-failed') errorMsg = "فشل الاتصال بالشبكة، تحقق من الإنترنت.";
                 
                 showToast(errorMsg, 'error');
-                
-                // تسجيل حدث الفشل
-                logEvent(analytics, 'exception', { description: error.code, fatal: false });
-
-                // إعادة تفعيل الزر
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = `<span>تفعيل الحساب الاستثنائي</span> <i class="fas fa-rocket text-xl"></i>`;
             }
