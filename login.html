@@ -13,7 +13,6 @@
         :root { --red-primary: #ff1e1e; --red-dark: #990000; --dark-bg: #0a0a0a; --glass-bg: rgba(255, 255, 255, 0.03); }
         body { font-family: 'Tajawal', sans-serif; background-color: var(--dark-bg); color: white; overflow-x: hidden; scroll-behavior: smooth; }
         
-        /* خلفية سينمائية متحركة فائقة الكثافة (نفس التصميم) */
         .bg-mesh {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
             background: radial-gradient(circle at 10% 10%, #2a0000 0%, #0a0a0a 100%),
@@ -25,7 +24,6 @@
             filter: blur(180px); opacity: 0.12; border-radius: 50%; animation: pulseGlow 10s infinite alternate;
         }
 
-        /* زجاجية البطاقة المتقدمة (Glassmorphism) */
         .glass-card {
             background: var(--glass-bg);
             backdrop-filter: blur(25px);
@@ -35,7 +33,6 @@
         }
         .glass-card:hover { transform: translateY(-5px); box-shadow: 0 45px 80px -20px rgba(255, 30, 30, 0.1); }
 
-        /* حقول الإدخال "الخارقة" (نفس التصميم) */
         .input-group input {
             background: rgba(255, 255, 255, 0.04);
             border: 2px solid rgba(255, 255, 255, 0.05);
@@ -50,7 +47,6 @@
         }
         .input-group input::placeholder { color: rgba(255, 255, 255, 0.3); font-weight: 400; }
 
-        /* زر الإرسال التفاعلي (نفس التصميم) */
         .btn-action {
             position: relative; overflow: hidden; transition: all 0.4s ease;
             background: linear-gradient(135deg, var(--red-primary) 0%, var(--red-dark) 100%);
@@ -67,14 +63,12 @@
         .btn-action:hover::after { left: 130%; }
         .btn-action:disabled { opacity: 0.6; cursor: not-allowed; transform: none; box-shadow: none; }
 
-        /* تحريكات مخصصة */
         @keyframes pulseGlow { 0% { opacity: 0.12; transform: scale(1); } 100% { opacity: 0.18; transform: scale(1.1); } }
         
-        /* نظام الإشعاراتToast المخصص (نفس التصميم) */
         #toast {
             position: fixed; top: 30px; left: 50%; transform: translateX(-50%) translateY(-150px);
             padding: 18px 35px; border-radius: 20px; font-weight: 800; transition: all 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-            z-index: 1000; box-shadow: 0 20px 40px rgba(0,0,0,0.4); display: flex; items-center; gap: 12px;
+            z-index: 1000; box-shadow: 0 20px 40px rgba(0,0,0,0.4); display: flex; align-items: center; gap: 12px;
             backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1);
         }
         #toast.show { transform: translateX(-50%) translateY(0); }
@@ -91,7 +85,7 @@
     <main class="w-full max-w-7xl grid lg:grid-cols-12 gap-0 overflow-hidden rounded-[40px] glass-card border border-white/5">
         
         <div class="lg:col-span-5 hidden lg:flex flex-col justify-between p-16 bg-gradient-to-br from-red-950/30 to-black/20 border-l border-white/5 relative overflow-hidden">
-            <div class="absolute inset-0 opacity-10" style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;20&quot; height=&quot;20&quot; viewBox=&quot;0 0 20 20&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3%3Cg fill=&quot;%23ffffff&quot; fill-opacity=&quot;0.4&quot; fill-rule=&quot;evenodd&quot;%3%3Ccircle cx=&quot;3&quot; cy=&quot;3&quot; r=&quot;3&quot;/%3%3Ccircle cx=&quot;13&quot; cy=&quot;13&quot; r=&quot;3&quot;/%3%3C/g%3%3C/svg%3E');"></div>
+            <div class="absolute inset-0 opacity-10" style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;20&quot; height=&quot;20&quot; viewBox=&quot;0 0 20 20&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cg fill=&quot;%23ffffff&quot; fill-opacity=&quot;0.4&quot; fill-rule=&quot;evenodd&quot;%3E%3Ccircle cx=&quot;3&quot; cy=&quot;3&quot; r=&quot;3&quot;/%3E%3Ccircle cx=&quot;13&quot; cy=&quot;13&quot; r=&quot;3&quot;/%3E%3C/g%3E%3C/svg%3E');"></div>
             <div class="relative z-10">
                 <a href="index.html" class="text-4xl font-[900] tracking-tighter text-white mb-24 block hover:text-red-500 transition active:scale-95">
                     RED<span class="text-red-600 italic">WORK</span>
@@ -172,12 +166,10 @@
     </div>
 
     <script type="module">
-        // استيراد الدوال الحديثة من SDKs (Modular)
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
         import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics.js";
 
-        // إعدادات Firebase الخاصة بك (النهائية والآمنة)
         const firebaseConfig = {
             apiKey: "AIzaSyCuoWMWT_7opd6oDd5-ATnZ36Fd07L9EU0",
             authDomain: "red-work-global.firebaseapp.com",
@@ -188,71 +180,60 @@
             measurementId: "G-Q09YJD3YF2"
         };
 
-        // بدء تشغيل الأنظمة
-        console.log("%c RED WORK %c Login System Initializing... ", "background:#dc2626; color:white; font-weight:bold", "background:black; color:white");
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
-        const analytics = getAnalytics(app);
+        
+        let analytics;
+        try {
+            analytics = getAnalytics(app);
+        } catch (e) {
+            console.warn("Analytics blocked or failed");
+        }
 
-        // عناصر الواجهة
         const loginForm = document.getElementById('loginForm');
         const toast = document.getElementById('toast');
         const toastMsg = document.getElementById('toastMsg');
         const toastIcon = document.getElementById('toastIcon');
         const submitBtn = document.getElementById('submitBtn');
 
-        // وظيفة الإشعار الاحترافي (نفس التصميم)
         function showToast(msg, type = 'error') {
             toastMsg.innerText = msg;
-            toast.className = type; // success or error
+            toast.className = type;
             toastIcon.className = type === 'error' ? 'fas fa-exclamation-circle text-2xl' : 'fas fa-check-circle text-2xl';
             toast.classList.add('show');
             setTimeout(() => toast.classList.remove('show'), 4500);
         }
 
-        // معالج إرسال الاستمارة (Core Logic)
         loginForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             
-            // جلب البيانات
             const email = document.getElementById('userEmail').value.trim();
             const pass = document.getElementById('userPassword').value;
 
-            // تأثير التحميل الاحترافي
             submitBtn.disabled = true;
             submitBtn.innerHTML = `<i class="fas fa-circle-notch animate-spin text-2xl"></i> <span>جاري التحقق من بصمتك الإبداعية...</span>`;
 
             try {
-                // تسجيل الدخول باستخدام Firebase SDK
                 const userCredential = await signInWithEmailAndPassword(auth, email, pass);
                 const user = userCredential.user;
-                console.log("Login Success:", user.uid);
 
-                // تسجيل حدث نجاح تسجيل الدخول في Analytics
-                logEvent(analytics, 'login', { method: 'email' });
+                if (analytics) logEvent(analytics, 'login', { method: 'email' });
 
-                showToast("تم التحقق بنجاح! جاري التوجيه لورشة عملك...", 'success');
+                showToast("تم التحقق بنجاح! جاري التوجيه للرئيسية...", 'success');
                 
-                // التوجيه الذكي لصفحة البروفايل بعد النجاح
-                setTimeout(() => { window.location.href = 'profile.html'; }, 2200);
+                // التعديل هنا: التوجيه لصفحة home.html
+                setTimeout(() => { window.location.href = 'home.html'; }, 2200);
 
             } catch (error) {
-                console.error("Firebase Login Error:", error.code, error.message);
+                console.error("Firebase Login Error:", error.code);
                 
-                // ترجمة أخطاء تسجيل الدخول لرسائل عربية مفهومة
                 let errorMsg = "حدث خطأ غير متوقع أثناء الدخول.";
                 if(error.code === 'auth/invalid-credential') errorMsg = "البريد الإلكتروني أو كلمة السر غير صحيحة!";
                 if(error.code === 'auth/user-not-found') errorMsg = "لا يوجد حساب مسجل بهذا البريد!";
-                if(error.code === 'auth/wrong-password') errorMsg = "كلمة السر غير صحيحة، حاول مجدداً.";
-                if(error.code === 'auth/network-request-failed') errorMsg = "فشل الاتصال بالشبكة، تحقق من الإنترنت.";
-                if(error.code === 'auth/too-many-requests') errorMsg = "محاولات تسجيل دخول كثيرة، يرجى الانتظار قليلاً.";
+                if(error.code === 'auth/wrong-password') errorMsg = "كلمة السر غير صحيحة!";
                 
                 showToast(errorMsg, 'error');
                 
-                // تسجيل حدث الفشل
-                logEvent(analytics, 'exception', { description: error.code, fatal: false });
-
-                // إعادة تفعيل الزر
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = `<span>دخول لورشة الإبداع</span> <i class="fas fa-sign-in-alt text-xl"></i>`;
             }
