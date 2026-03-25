@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم | RED WORK Dashboard</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root { --red-primary: #ff1e1e; --dark-bg: #050505; --card-bg: rgba(255, 255, 255, 0.03); }
+        body { font-family: 'Tajawal', sans-serif; background-color: var(--dark-bg); color: white; }
+        
+        .sidebar-item.active { background: linear-gradient(90deg, rgba(255,30,30,0.1) 0%, transparent 100%); border-right: 4px solid var(--red-primary); color: white; }
+        .glass-card { background: var(--card-bg); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.05); }
+        
+        .stat-glow { filter: drop-shadow(0 0 15px rgba(255, 30, 30, 0.3)); }
+        
+        /* تحسين السكرول */
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--red-primary); }
+    </style>
+</head>
+<body class="min-h-screen flex overflow-hidden">
+
+    <aside class="w-72 border-l border-white/5 bg-black/40 hidden lg:flex flex-col py-8">
+        <div class="px-8 mb-12">
+            <a href="index.html" class="text-3xl font-[900] tracking-tighter text-white">
+                RED<span class="text-red-600 italic">WORK</span>
+            </a>
+        </div>
+
+        <nav class="flex-1 space-y-2">
+            <a href="home.html" class="sidebar-item active flex items-center gap-4 px-8 py-4 font-bold text-gray-400 hover:text-white transition">
+                <i class="fas fa-th-large text-xl"></i> لوحة التحكم
+            </a>
+            <a href="explore.html" class="sidebar-item flex items-center gap-4 px-8 py-4 font-bold text-gray-400 hover:text-white transition">
+                <i class="fas fa-search text-xl"></i> استكشاف الفرص
+            </a>
+            <a href="messages.html" class="sidebar-item flex items-center gap-4 px-8 py-4 font-bold text-gray-400 hover:text-white transition">
+                <i class="fas fa-comment-dots text-xl"></i> الرسائل
+                <span class="bg-red-600 text-white text-[10px] px-2 py-0.5 rounded-full mr-auto">3</span>
+            </a>
+            <a href="wallet.html" class="sidebar-item flex items-center gap-4 px-8 py-4 font-bold text-gray-400 hover:text-white transition">
+                <i class="fas fa-wallet text-xl"></i> المحفظة
+            </a>
+        </nav>
+
+        <div class="px-8 mt-auto pt-8 border-t border-white/5">
+            <a href="index.html" class="flex items-center gap-4 text-gray-500 font-bold hover:text-red-500 transition">
+                <i class="fas fa-sign-out-alt"></i> تسجيل الخروج
+            </a>
+        </div>
+    </aside>
+
+    <main class="flex-1 overflow-y-auto h-screen relative">
+        <header class="h-20 border-b border-white/5 flex items-center justify-between px-10 sticky top-0 bg-black/20 backdrop-blur-xl z-50">
+            <h2 class="text-xl font-black italic tracking-tighter">ورشة الإبداع الخاصة بك</h2>
+            
+            <div class="flex items-center gap-6">
+                <button class="text-gray-400 hover:text-white transition relative">
+                    <i class="fas fa-bell text-xl"></i>
+                    <span class="absolute -top-1 -right-1 w-2 h-2 bg-red-600 rounded-full"></span>
+                </button>
+                <div class="flex items-center gap-3 bg-white/5 px-4 py-2 rounded-2xl border border-white/5">
+                    <div class="text-right">
+                        <p id="userName" class="text-xs font-black italic">طه المبدع</p>
+                        <p class="text-[10px] text-gray-500 uppercase font-bold tracking-widest">المستوى الاحترافي</p>
+                    </div>
+                    <img src="https://i.pravatar.cc/150?u=taha" class="w-10 h-10 rounded-xl border border-red-600/50">
+                </div>
+            </div>
+        </header>
+
+        <div class="p-10 space-y-10">
+            
+            <section class="grid lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-2 glass-card p-10 rounded-[40px] relative overflow-hidden flex flex-col justify-center">
+                    <div class="absolute -right-20 -top-20 w-64 h-64 bg-red-600/10 blur-[100px]"></div>
+                    <h3 class="text-4xl font-black mb-4 italic leading-tight">أهلاً بك مجدداً، <br><span class="text-red-600 uppercase">طه</span>.</h3>
+                    <p class="text-gray-400 font-medium italic mb-8 max-w-md">لديك مشاريع جديدة في <span class="text-white font-bold">Red Clients</span> تنتظر مهاراتك. تم مشاهدة ملفك 124 مرة هذا الأسبوع.</p>
+                    <div class="flex gap-4">
+                        <a href="profile.html" class="bg-white text-black px-8 py-3 rounded-2xl font-black text-sm italic hover:bg-red-600 hover:text-white transition-all">تعديل الملف الشخصي</a>
+                        <button class="bg-red-600/10 text-red-500 px-8 py-3 rounded-2xl font-black text-sm italic border border-red-600/20 hover:bg-red-600 hover:text-white transition-all">ترقية الحساب</button>
+                    </div>
+                </div>
+
+                <div class="glass-card p-10 rounded-[40px] flex flex-col justify-between border-red-600/20">
+                    <p class="text-gray-500 font-black text-xs uppercase tracking-widest italic mb-4">الرصيد المتاح</p>
+                    <div>
+                        <h4 class="text-5xl font-[900] stat-glow italic tracking-tighter">$2,450<span class="text-sm text-red-600 mr-2">USD</span></h4>
+                        <p class="text-green-500 text-xs font-bold mt-2"><i class="fas fa-arrow-up ml-1"></i> +15% عن الشهر الماضي</p>
+                    </div>
+                    <a href="wallet.html" class="mt-8 flex items-center justify-between text-xs font-black uppercase text-gray-400 hover:text-white transition">
+                        سحب الأرباح الآن <i class="fas fa-chevron-left"></i>
+                    </a>
+                </div>
+            </section>
+
+            <section class="grid lg:grid-cols-12 gap-8">
+                <div class="lg:col-span-8 space-y-6">
+                    <div class="flex justify-between items-center px-2">
+                        <h5 class="text-xl font-black italic">المشاريع الجارية</h5>
+                        <a href="#" class="text-xs font-bold text-gray-500 hover:text-red-600">عرض الكل</a>
+                    </div>
+                    
+                    <div class="glass-card p-6 rounded-[32px] flex items-center justify-between group hover:border-red-600/40 transition-all">
+                        <div class="flex items-center gap-5">
+                            <div class="w-14 h-14 bg-red-600/20 rounded-2xl flex items-center justify-center text-red-500 text-xl">
+                                <i class="fas fa-code"></i>
+                            </div>
+                            <div>
+                                <h6 class="font-black italic">تطوير منصة RedClients</h6>
+                                <p class="text-xs text-gray-500 font-bold italic">الموعد النهائي: بعد 3 أيام</p>
+                            </div>
+                        </div>
+                        <div class="text-left">
+                            <p class="text-sm font-black italic">$800</p>
+                            <span class="text-[10px] bg-orange-500/10 text-orange-500 px-2 py-0.5 rounded-lg font-bold uppercase">قيد التنفيذ</span>
+                        </div>
+                    </div>
+
+                    <div class="glass-card p-6 rounded-[32px] flex items-center justify-between group hover:border-red-600/40 transition-all">
+                        <div class="flex items-center gap-5">
+                            <div class="w-14 h-14 bg-blue-600/20 rounded-2xl flex items-center justify-center text-blue-500 text-xl">
+                                <i class="fas fa-paint-brush"></i>
+                            </div>
+                            <div>
+                                <h6 class="font-black italic">تصميم هوية بصرية - شركة X</h6>
+                                <p class="text-xs text-gray-500 font-bold italic">الموعد النهائي: منتهي</p>
+                            </div>
+                        </div>
+                        <div class="text-left">
+                            <p class="text-sm font-black italic">$350</p>
+                            <span class="text-[10px] bg-green-500/10 text-green-500 px-2 py-0.5 rounded-lg font-bold uppercase">تم التسليم</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-4 space-y-6">
+                    <h5 class="text-xl font-black italic px-2">إجراءات سريعة</h5>
+                    <div class="grid grid-cols-2 gap-4">
+                        <button class="glass-card p-6 rounded-[32px] hover:bg-red-600 transition-all group">
+                            <i class="fas fa-plus text-2xl mb-4 text-red-500 group-hover:text-white"></i>
+                            <p class="text-xs font-black italic">مشروع جديد</p>
+                        </button>
+                        <button class="glass-card p-6 rounded-[32px] hover:bg-white hover:text-black transition-all group">
+                            <i class="fas fa-file-invoice text-2xl mb-4 text-gray-500 group-hover:text-black"></i>
+                            <p class="text-xs font-black italic">الفواتير</p>
+                        </button>
+                        <button class="glass-card p-6 rounded-[32px] hover:bg-white hover:text-black transition-all group">
+                            <i class="fas fa-shield-alt text-2xl mb-4 text-gray-500 group-hover:text-black"></i>
+                            <p class="text-xs font-black italic">الأمان</p>
+                        </button>
+                        <button class="glass-card p-6 rounded-[32px] hover:bg-white hover:text-black transition-all group">
+                            <i class="fas fa-headset text-2xl mb-4 text-gray-500 group-hover:text-black"></i>
+                            <p class="text-xs font-black italic">الدعم</p>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+</body>
+</html>
