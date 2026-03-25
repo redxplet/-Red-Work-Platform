@@ -3,322 +3,140 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تكوين الهوية العالمية | Red Work Elite</title>
+    <title>تعديل الهوية العالمية | RED PRO</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        :root { --red-accent: #ff1e1e; --soft-gray: #f9fafb; --border-color: #e5e7eb; }
-        body { 
-            font-family: 'Tajawal', sans-serif; 
-            background-color: #ffffff; 
-            color: #111827;
-            background-image: radial-gradient(#ff1e1e08 1px, transparent 1px);
-            background-size: 30px 30px;
-        }
+        :root { --red-main: #ff1e1e; --dark-bg: #0a0a0a; --glass: rgba(255, 255, 255, 0.03); }
+        body { font-family: 'Tajawal', sans-serif; background-color: var(--dark-bg); color: white; scroll-behavior: smooth; }
         
-        .card-premium {
-            background: #ffffff;
-            border: 1px solid var(--border-color);
-            border-radius: 35px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .card-premium:hover { box-shadow: 0 25px 50px rgba(255, 30, 30, 0.08); transform: translateY(-5px); }
-
-        .input-clean {
-            background: var(--soft-gray);
+        /* تأثيرات الزجاج الفاخرة */
+        .glass-panel { background: var(--glass); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 35px; }
+        
+        .input-pro {
+            background: rgba(255, 255, 255, 0.05);
             border: 2px solid transparent;
-            border-radius: 18px;
-            padding: 16px 20px;
+            border-radius: 20px;
+            padding: 18px;
             width: 100%;
-            transition: all 0.3s ease;
-            font-weight: 600;
-            color: #1f2937;
-        }
-        .input-clean:focus {
-            background: #ffffff;
-            border-color: var(--red-accent);
-            box-shadow: 0 0 0 5px rgba(255, 30, 30, 0.05);
-            outline: none;
-        }
-
-        .tag-select {
-            display: inline-flex;
-            align-items: center;
-            padding: 10px 18px;
-            background: #f3f4f6;
-            border-radius: 14px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            font-weight: 700;
-            transition: 0.3s;
-        }
-        .tag-select:has(input:checked) { background: var(--red-accent); color: white; transform: scale(1.05); }
-        .tag-select input { display: none; }
-
-        .drop-area {
-            border: 3px dashed var(--border-color);
-            border-radius: 35px;
-            transition: 0.4s;
-            background: var(--soft-gray);
-            cursor: pointer;
-        }
-        .drop-area:hover { border-color: var(--red-accent); background: #fffafa; }
-
-        .btn-launch {
-            background: linear-gradient(135deg, #ff1e1e 0%, #990000 100%);
             color: white;
-            padding: 28px;
-            border-radius: 28px;
-            font-size: 1.6rem;
-            font-weight: 900;
-            box-shadow: 0 15px 40px rgba(255, 30, 30, 0.35);
-            transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .btn-launch:hover { transform: scale(1.03); box-shadow: 0 25px 60px rgba(255, 30, 30, 0.5); }
-        
-        /* إضافة ستايل مفتاح الحالة (خيار 2) */
-        .switch { position: relative; display: inline-block; width: 60px; height: 34px; }
-        .switch input { opacity: 0; width: 0; height: 0; }
-        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; border-radius: 34px; }
-        .slider:before { position: absolute; content: ""; height: 26px; width: 26px; left: 4px; bottom: 4px; background-color: white; transition: .4s; border-radius: 50%; }
-        input:checked + .slider { background-color: #22c55e; }
-        input:checked + .slider:before { transform: translateX(26px); }
+        .input-pro:focus { border-color: var(--red-main); background: rgba(255, 255, 255, 0.08); outline: none; box-shadow: 0 0 20px rgba(255, 30, 30, 0.1); }
 
-        /* ستايل الباكيجات (خيار 4) */
-        .pkg-card { border: 2px solid #f3f4f6; border-radius: 20px; padding: 20px; transition: 0.3s; }
-        .pkg-card:hover { border-color: var(--red-accent); background: #fffafa; }
+        /* التاجات الملونة للغات */
+        .lang-tag {
+            display: inline-flex; align-items: center; padding: 12px 20px;
+            background: rgba(255, 255, 255, 0.05); border-radius: 15px;
+            cursor: pointer; font-weight: 700; transition: 0.3s;
+        }
+        .lang-tag:has(input:checked) { background: var(--red-main); transform: scale(1.05); }
+        .lang-tag input { display: none; }
 
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #f1f1f1; }
-        ::-webkit-scrollbar-thumb { background: #ff1e1e; border-radius: 10px; }
+        .btn-glow {
+            background: linear-gradient(135deg, #ff1e1e 0%, #990000 100%);
+            box-shadow: 0 15px 40px rgba(255, 30, 30, 0.3);
+            transition: 0.4s ease;
+        }
+        .btn-glow:hover { transform: translateY(-5px); box-shadow: 0 25px 50px rgba(255, 30, 30, 0.5); }
+
+        /* ستايل مخصص للسكرول بار */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #000; }
+        ::-webkit-scrollbar-thumb { background: var(--red-main); border-radius: 10px; }
     </style>
 </head>
-<body class="p-4 md:p-12">
+<body class="p-6 md:p-12">
 
-    <div class="max-w-7xl mx-auto">
-        <header class="mb-16 flex flex-col md:flex-row justify-between items-center gap-6">
-            <div class="text-center md:text-right">
-                <h1 class="text-6xl font-[900] tracking-tighter text-black uppercase">RED <span class="text-red-600 italic">PRO</span></h1>
-                <p class="text-gray-500 font-bold text-xl mt-2 italic">مرحباً <span id="welcomeName">مبدعنا</span>، صمم هويتك العالمية الآن.</p>
+    <div class="max-w-6xl mx-auto">
+        <header class="flex flex-col md:flex-row justify-between items-center mb-16 gap-6">
+            <div class="text-right">
+                <h1 class="text-5xl font-[900] tracking-tighter italic">RED <span class="text-red-600">PRO</span></h1>
+                <p class="text-gray-500 font-bold mt-2">قم ببناء ملفك الشخصي الذي سيراه العملاء في <span class="text-white">RED CLIENTS</span></p>
             </div>
-            
-            <div class="flex items-center gap-4 bg-white p-4 rounded-3xl border border-gray-100 shadow-sm">
-                <span class="font-bold text-gray-600">الحالة اللحظية:</span>
-                <label class="switch">
-                    <input type="checkbox" id="availabilityToggle" checked>
-                    <span class="slider"></span>
-                </label>
-                <span id="statusText" class="font-black text-green-600 uppercase text-xs">متاح للعمل</span>
-            </div>
+            <a href="home.html" class="px-8 py-3 bg-white/5 border border-white/10 rounded-2xl font-black text-sm hover:bg-red-600 transition-all">
+                <i class="fas fa-arrow-right ml-2"></i> العودة للوحة التحكم
+            </a>
         </header>
 
-        <form id="globalProfileForm" class="grid lg:grid-cols-12 gap-10">
+        <form id="profileForm" class="grid lg:grid-cols-12 gap-10">
             
-            <div class="lg:col-span-4 space-y-8">
-                <div class="card-premium p-10">
-                    <h3 class="text-2xl font-black mb-8 flex items-center gap-3 italic">
-                        <i class="fas fa-id-card-alt text-red-600"></i> بيانات الهوية
-                    </h3>
+            <div class="lg:col-span-5 space-y-8">
+                <div class="glass-panel p-8 md:p-10">
+                    <h3 class="text-xl font-black mb-8 text-red-500 italic uppercase tracking-widest border-r-4 border-red-600 pr-4">هوية المبدع</h3>
                     
                     <div class="space-y-6">
-                        <div>
-                            <label class="block text-xs font-black text-gray-400 uppercase tracking-widest mb-3 mr-2">الاسم الكامل <span class="text-red-500">*</span></label>
-                            <div class="relative">
-                                <i class="fas fa-user absolute left-5 top-1/2 -translate-y-1/2 text-gray-400"></i>
-                                <input type="text" id="fullName" required class="input-clean pl-12" placeholder="طه بن جلول | Taha Benjelloun">
+                        <div class="text-center mb-8">
+                            <div class="relative inline-block group">
+                                <img id="avatarPreview" src="https://ui-avatars.com/api/?name=User&background=333&color=fff" class="w-32 h-32 rounded-[40px] object-cover border-4 border-white/5 group-hover:border-red-600 transition-all">
+                                <button type="button" class="absolute bottom-0 right-0 bg-red-600 w-10 h-10 rounded-2xl flex items-center justify-center border-4 border-[#0a0a0a] hover:scale-110 transition">
+                                    <i class="fas fa-camera text-sm"></i>
+                                </button>
                             </div>
                         </div>
 
                         <div>
-                            <label class="block text-xs font-black text-gray-400 uppercase tracking-widest mb-3 mr-2">العمر <span class="text-red-500">*</span></label>
-                            <div class="relative">
-                                <i class="fas fa-birthday-cake absolute left-5 top-1/2 -translate-y-1/2 text-gray-400"></i>
-                                <input type="number" id="userAge" required class="input-clean pl-12" placeholder="22">
-                            </div>
+                            <label class="block text-[10px] font-black text-gray-500 uppercase mb-3 tracking-widest">الاسم الاحترافي</label>
+                            <input type="text" id="fullName" class="input-pro" placeholder="طه المبدع">
                         </div>
 
                         <div>
-                            <label class="block text-xs font-black text-gray-400 uppercase tracking-widest mb-3 mr-2">الدولة الإقامة</label>
-                            <div class="relative">
-                                <i class="fas fa-map-marker-alt absolute left-5 top-1/2 -translate-y-1/2 text-gray-400"></i>
-                                <select id="fullCountryList" class="input-clean pl-12 cursor-pointer appearance-none">
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="p-4 bg-red-50 rounded-2xl border border-red-100 mt-4">
-                            <p class="text-[10px] font-black text-red-600 uppercase mb-1"><i class="fas fa-fire"></i> نبض السوق (Heatmap)</p>
-                            <p class="text-[11px] text-gray-600 font-bold leading-tight">طلب مرتفع على تخصصك حالياً في: <span class="text-red-600">المغرب، السعودية، الإمارات</span></p>
+                            <label class="block text-[10px] font-black text-gray-500 uppercase mb-3 tracking-widest">التخصص الرئيسي</label>
+                            <select id="mainSkill" class="input-pro appearance-none cursor-pointer">
+                                <option>Full Stack Developer</option>
+                                <option>UI/UX Designer</option>
+                                <option>Motion Graphics Artist</option>
+                                <option>Digital Marketer</option>
+                            </select>
                         </div>
 
                         <div>
-                            <label class="block text-xs font-black text-gray-400 uppercase tracking-widest mb-3 mr-2">اللغات المتقنة</label>
-                            <div id="languageGrid" class="grid grid-cols-2 gap-2 h-44 overflow-y-auto p-3 border border-gray-100 rounded-2xl bg-gray-50/50">
-                            </div>
+                            <label class="block text-[10px] font-black text-gray-500 uppercase mb-3 tracking-widest">اللغات المتقنة</label>
+                            <div id="langContainer" class="flex flex-wrap gap-2">
+                                </div>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="card-premium p-10 bg-gray-900 text-white border-none shadow-2xl">
-                    <h3 class="text-2xl font-black mb-6 flex items-center gap-3 italic">
-                        <i class="fas fa-calculator text-red-500"></i> حاسبة الأهداف
-                    </h3>
-                    <div class="space-y-5">
-                        <label class="block text-[10px] font-black text-gray-400 uppercase italic">هدفك الشهري المأمول ($)</label>
-                        <input type="number" id="targetEarnings" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl text-white font-bold outline-none focus:border-red-500" value="1000">
-                        <div class="bg-red-600/10 p-4 rounded-2xl border border-red-600/20">
-                            <p class="text-xs font-bold leading-relaxed">تحتاج إلى حوالي <span id="clientCount" class="text-red-500 text-xl font-black">--</span> عملاء شهرياً بناءً على سعر خدمتك لتحقيق هذا الهدف.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card-premium p-10">
-                    <h3 class="text-2xl font-black mb-8 flex items-center gap-3 italic">
-                        <i class="fas fa-briefcase text-red-600"></i> الكفاءة المهنية
-                    </h3>
-                    <div class="space-y-6">
+            <div class="lg:col-span-7 space-y-8">
+                <div class="glass-panel p-8 md:p-10">
+                    <h3 class="text-xl font-black mb-8 text-red-500 italic uppercase tracking-widest border-r-4 border-red-600 pr-4">نبذة عن خبرتك</h3>
+                    <textarea id="userBio" rows="5" class="input-pro text-lg font-medium" placeholder="اكتب شيئاً مبهراً عن مهاراتك..."></textarea>
+                    
+                    <div class="grid md:grid-cols-2 gap-6 mt-8">
                         <div>
-                            <label class="block text-xs font-black text-gray-400 uppercase tracking-widest mb-3">سنوات الخبرة</label>
-                            <input type="number" id="experienceYears" class="input-clean" placeholder="مثلاً: 4 سنوات">
+                            <label class="block text-[10px] font-black text-gray-500 uppercase mb-3 tracking-widest">سعر الخدمة ($)</label>
+                            <input type="number" id="hourlyRate" class="input-pro" placeholder="50.00">
                         </div>
                         <div>
-                            <label class="block text-xs font-black text-gray-400 uppercase tracking-widest mb-3">التخصص الرئيسي</label>
-                            <select id="detailedSpecialties" class="input-clean cursor-pointer">
-                                <optgroup label="البرمجة والتكنولوجيا">
-                                    <option>Full Stack Web Developer</option>
-                                    <option>AI & Machine Learning Specialist</option>
-                                    <option>Cyber Security Expert</option>
-                                    <option>Game Developer (C#/C++)</option>
-                                    <option>Data Scientist</option>
-                                </optgroup>
-                                <optgroup label="التصميم والفنون">
-                                    <option>Brand Identity Designer</option>
-                                    <option>3D Artist & Modeler</option>
-                                    <option>UI/UX Architect</option>
-                                    <option>Motion Designer</option>
-                                    <option>Digital Illustrator</option>
-                                </optgroup>
-                                <optgroup label="التسويق والمحتوى">
-                                    <option>SEO Specialist</option>
-                                    <option>Video Editor (Cinematic)</option>
-                                    <option>Copywriter & Storyteller</option>
-                                    <option>Digital Marketing Strategist</option>
-                                </optgroup>
+                            <label class="block text-[10px] font-black text-gray-500 uppercase mb-3 tracking-widest">الوحدة</label>
+                            <select id="rateUnit" class="input-pro">
+                                <option>للساعة الواحدة</option>
+                                <option>لكل مشروع</option>
+                                <option>لكل خدمة</option>
                             </select>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="lg:col-span-8 space-y-8">
-                
-                <div class="card-premium p-10 md:p-14">
-                    <h3 class="text-3xl font-[900] mb-8 border-r-8 border-red-600 pr-6">باقات العمل (Service Packages)</h3>
-                    <div class="grid md:grid-cols-3 gap-6">
-                        <div class="pkg-card">
-                            <p class="font-black text-red-600 mb-2 uppercase text-xs tracking-widest">الاقتصادية</p>
-                            <input type="number" class="input-clean text-sm mb-3 h-12" placeholder="السعر ($)">
-                            <textarea class="w-full bg-transparent text-[11px] font-bold text-gray-500 h-24 border-none focus:ring-0" placeholder="وصف الخدمة (مثلاً: تصميم شعار واحد بسيط، تعديل واحد، تسليم في 3 أيام)"></textarea>
-                        </div>
-                        <div class="pkg-card border-red-100 bg-red-50/20 shadow-lg">
-                            <p class="font-black text-red-600 mb-2 uppercase text-xs tracking-widest italic underline">الاحترافية</p>
-                            <input type="number" class="input-clean text-sm mb-3 h-12" placeholder="السعر ($)">
-                            <textarea class="w-full bg-transparent text-[11px] font-bold text-gray-500 h-24 border-none focus:ring-0" placeholder="وصف الخدمة (مثلاً: 3 خيارات شعارات، تعديلات غير محدودة، ملفات المصدر الكاملة)"></textarea>
-                        </div>
-                        <div class="pkg-card">
-                            <p class="font-black text-red-600 mb-2 uppercase text-xs tracking-widest">الـ VIP</p>
-                            <input type="number" class="input-clean text-sm mb-3 h-12" placeholder="السعر ($)">
-                            <textarea class="w-full bg-transparent text-[11px] font-bold text-gray-500 h-24 border-none focus:ring-0" placeholder="وصف الخدمة (مثلاً: هوية بصرية كاملة، دعم فني لمدة شهر، تنفيذ في 24 ساعة)"></textarea>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card-premium p-10 md:p-14">
-                    <h3 class="text-3xl font-[900] mb-8 border-r-8 border-red-600 pr-6">مركز رفع المشاريع (Multi-Format)</h3>
-                    
-                    <div id="dropZone" class="drop-area p-20 text-center relative overflow-hidden group">
-                        <div class="absolute inset-0 bg-red-600/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                        <div class="relative z-10">
-                            <i class="fas fa-cloud-arrow-up text-7xl text-gray-300 mb-6 group-hover:text-red-600 transition-colors"></i>
-                            <p class="text-3xl font-black mb-3">أضف أعمالك الاستثنائية</p>
-                            <p class="text-gray-400 font-bold max-w-lg mx-auto leading-relaxed">نقبل كافة الصيغ: JPG, PNG, MP4, MOV, PDF, ZIP, PSD, AI, Blend, OBJ, FBX, SVG وغيرها الكثير.</p>
-                            
-                            <input type="file" id="universalFiles" multiple class="hidden">
-                            <button type="button" onclick="document.getElementById('universalFiles').click()" class="mt-10 bg-black text-white px-16 py-5 rounded-2xl font-black text-lg hover:bg-red-600 transition-all active:scale-95 shadow-xl">اختر الملفات من جهازك</button>
-                        </div>
-                    </div>
-
-                    <div id="filesList" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-5 mt-10">
-                    </div>
-                </div>
-
-                <div class="card-premium p-10 md:p-14 border-r-8 border-r-green-500">
-                    <div class="flex justify-between items-center mb-6">
-                        <h3 class="text-3xl font-[900]">تأمين الدفع (Red Escrow)</h3>
-                        <i class="fas fa-shield-alt text-green-500 text-4xl"></i>
-                    </div>
-                    <div class="p-6 bg-green-50 rounded-3xl border border-green-100">
-                        <p class="text-sm font-bold text-green-800 leading-relaxed italic">
-                            هذا البروفايل محمي بنظام الضمان. لن تبدأ العمل إلا بعد إيداع العميل للمبلغ في خزنة الموقع، ولن يتم تحرير المبلغ لك إلا بعد تأكيد التسليم. أمان مالي 100%.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="card-premium p-10 md:p-14">
-                    <h3 class="text-3xl font-[900] mb-10 border-r-8 border-red-600 pr-6">التسعير والتفاصيل الإضافية</h3>
-                    
-                    <div class="grid md:grid-cols-2 gap-10 mb-10">
-                        <div>
-                            <label class="block text-xs font-black text-gray-400 mb-4 uppercase italic">معدل السعر الأساسي ($)</label>
-                            <div class="flex gap-3">
-                                <input type="number" id="priceAmount" class="input-clean text-2xl" placeholder="1.00">
-                                <select id="priceUnit" class="input-clean w-64 text-sm">
-                                    <option>للصورة الواحدة</option>
-                                    <option>للساعة الواحدة</option>
-                                    <option>للمشروع الكامل</option>
-                                    <option>للصفحة الواحدة</option>
-                                    <option>لكل 1000 كلمة</option>
-                                    <option>لكل دقيقة فيديو</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div>
-                            <label class="block text-xs font-black text-gray-400 mb-4 uppercase italic">رابط معرض خارجي (GitHub/Behance)</label>
-                            <div class="relative">
-                                <i class="fas fa-link absolute left-5 top-1/2 -translate-y-1/2 text-gray-400"></i>
-                                <input type="url" id="externalLink" class="input-clean pl-12" placeholder="https://portfolio.com/taha">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="space-y-8">
-                        <div>
-                            <label class="block text-xs font-black text-gray-400 mb-4 uppercase italic">نبذة تعريفية تجذب العملاء (BIO)</label>
-                            <textarea id="richBio" rows="6" class="input-clean leading-relaxed" placeholder="اشرح لماذا أنت الخيار الأفضل..."></textarea>
-                        </div>
-                        <div>
-                            <label class="block text-xs font-black text-gray-400 mb-4 uppercase italic">توصيات العملاء أو شركاء النجاح</label>
-                            <textarea id="proTestimonials" rows="4" class="input-clean italic" placeholder="مثال: 'طه مبدع ملتزم بالمواعيد...'"></textarea>
-                        </div>
-                    </div>
-                </div>
-
-                <button type="submit" class="btn-launch w-full flex items-center justify-center gap-8 group">
-                    <span>اعتماد الهوية ونشرها في RED CLIENTS</span>
-                    <i class="fas fa-satellite group-hover:rotate-45 transition-transform"></i>
+                <button type="submit" id="saveBtn" class="btn-glow w-full py-6 rounded-[30px] font-[900] text-xl italic uppercase tracking-tighter flex items-center justify-center gap-4 active:scale-95">
+                    <span>اعتماد وتحديث الملف العالمي</span>
+                    <i class="fas fa-check-circle text-2xl"></i>
                 </button>
+                
+                <p class="text-center text-gray-600 text-[10px] font-black uppercase tracking-widest">RED WORK GLOBAL SYSTEM • 2026</p>
             </div>
         </form>
     </div>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getFirestore, doc, updateDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-        import { getAuth } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyCuoWMWT_7opd6oDd5-ATnZ36Fd07L9EU0",
@@ -326,113 +144,68 @@
             projectId: "red-work-global",
             storageBucket: "red-work-global.firebasestorage.app",
             messagingSenderId: "616979540612",
-            appId: "1:616979540612:web:a66d3d6412c930b9a970d1",
-            measurementId: "G-Q09YJD3YF2"
+            appId: "1:616979540612:web:a66d3d6412c930b9a970d1"
         };
 
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
         const auth = getAuth(app);
 
-        const countries = ["المغرب", "السعودية", "مصر", "الإمارات", "قطر", "الكويت", "عمان", "البحرين", "الأردن", "لبنان", "تونس", "الجزائر", "ليبيا", "موريتانيا", "فلسطين", "العراق", "أمريكا", "بريطانيا", "فرنسا", "ألمانيا", "اليابان", "الصين", "كندا", "أستراليا", "تركيا", "إسبانيا", "إيطاليا"];
-        const languages = ["العربية", "English", "Français", "Español", "Deutsch", "中文", "日本語", "Русский", "Português", "Italiano", "Türkçe", "हिندي", "한국어", "Dutch", "Greek", "Swedish"];
-        
-        const countrySelect = document.getElementById('fullCountryList');
-        countries.forEach(c => {
-            let opt = document.createElement('option');
-            opt.value = c; opt.innerText = c;
-            countrySelect.appendChild(opt);
+        // توليد لغات البرمجة/العمل
+        const langs = ["العربية", "English", "Français", "Spanish"];
+        const container = document.getElementById('langContainer');
+        langs.forEach(l => {
+            const label = document.createElement('label');
+            label.className = "lang-tag";
+            label.innerHTML = `<input type="checkbox" name="languages" value="${l}"> <span>${l}</span>`;
+            container.appendChild(label);
         });
 
-        const langGrid = document.getElementById('languageGrid');
-        languages.forEach(l => {
-            let label = document.createElement('label');
-            label.className = "tag-select";
-            label.innerHTML = `<input type="checkbox" name="langs" value="${l}"> <span>${l}</span>`;
-            langGrid.appendChild(label);
+        // جلب البيانات الموجودة مسبقاً
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                const docRef = doc(db, "users", user.uid);
+                const docSnap = await getDoc(docRef);
+                if (docSnap.exists()) {
+                    const data = docSnap.data();
+                    document.getElementById('fullName').value = data.fullName || "";
+                    document.getElementById('userBio').value = data.bio || "";
+                    document.getElementById('hourlyRate').value = data.balance || "";
+                    if(data.profilePic) document.getElementById('avatarPreview').src = data.profilePic;
+                }
+            } else {
+                window.location.href = 'login.html';
+            }
         });
 
-        // منطق تحديث الحالة اللحظية
-        const toggle = document.getElementById('availabilityToggle');
-        const statusText = document.getElementById('statusText');
-        toggle.addEventListener('change', () => {
-            statusText.innerText = toggle.checked ? "متاح للعمل" : "مشغول حالياً";
-            statusText.className = toggle.checked ? "font-black text-green-600 uppercase text-xs" : "font-black text-orange-600 uppercase text-xs";
-        });
-
-        // منطق حاسبة الأرباح
-        const targetInput = document.getElementById('targetEarnings');
-        const priceInput = document.getElementById('priceAmount');
-        const clientSpan = document.getElementById('clientCount');
-
-        function updateSimulation() {
-            const target = parseFloat(targetInput.value) || 0;
-            const price = parseFloat(priceInput.value) || 1;
-            clientSpan.innerText = Math.ceil(target / price);
-        }
-        targetInput.addEventListener('input', updateSimulation);
-        priceInput.addEventListener('input', updateSimulation);
-        updateSimulation();
-
-        const fileInput = document.getElementById('universalFiles');
-        const filesList = document.getElementById('filesList');
-
-        fileInput.addEventListener('change', (e) => {
-            filesList.innerHTML = "";
-            Array.from(e.target.files).forEach(file => {
-                const ext = file.name.split('.').pop().toUpperCase();
-                const item = document.createElement('div');
-                item.className = "bg-white p-5 rounded-3xl border border-gray-100 flex flex-col items-center text-center shadow-sm hover:shadow-md transition-all";
-                item.innerHTML = `
-                    <div class="w-14 h-14 bg-red-50 rounded-2xl flex items-center justify-center mb-3">
-                        <i class="fas fa-file-code text-red-600 text-2xl"></i>
-                    </div>
-                    <span class="text-[11px] font-black truncate w-full px-2">${file.name}</span>
-                    <span class="text-[9px] text-red-500 font-black mt-2 bg-red-50 px-3 py-1 rounded-full border border-red-100">${ext}</span>
-                `;
-                filesList.appendChild(item);
-            });
-        });
-
-        document.getElementById('globalProfileForm').addEventListener('submit', async (e) => {
+        // حفظ البيانات
+        document.getElementById('profileForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             const user = auth.currentUser;
-            if(!user) { alert("يرجى تسجيل الدخول أولاً للمزامنة!"); return; }
+            const btn = document.getElementById('saveBtn');
+            
+            btn.innerHTML = `<i class="fas fa-spinner animate-spin"></i> جاري المزامنة...`;
+            btn.disabled = true;
 
-            const submitBtn = e.target.querySelector('button[type="submit"]');
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = `<i class="fas fa-sync animate-spin"></i> جاري مزامنة بياناتك...`;
-
-            const selectedLangs = Array.from(document.querySelectorAll('input[name="langs"]:checked')).map(i => i.value);
-
-            const fullData = {
-                fullName: document.getElementById('fullName').value,
-                age: document.getElementById('userAge').value,
-                country: document.getElementById('fullCountryList').value,
-                languages: selectedLangs,
-                experienceYears: document.getElementById('experienceYears').value,
-                mainSpecialty: document.getElementById('detailedSpecialties').value,
-                pricing: {
-                    amount: document.getElementById('priceAmount').value,
-                    unit: document.getElementById('priceUnit').value
-                },
-                isAvailable: document.getElementById('availabilityToggle').checked,
-                portfolioLink: document.getElementById('externalLink').value,
-                bio: document.getElementById('richBio').value,
-                testimonials: document.getElementById('proTestimonials').value,
-                lastUpdate: serverTimestamp(),
-                isProfileLive: true
-            };
+            const selectedLangs = Array.from(document.querySelectorAll('input[name="languages"]:checked')).map(el => el.value);
 
             try {
-                await updateDoc(doc(db, "creators", user.uid), fullData);
-                alert("تم إطلاق هويتك العالمية بنجاح!");
-                window.location.href = "dashboard.html";
+                await setDoc(doc(db, "users", user.uid), {
+                    fullName: document.getElementById('fullName').value,
+                    bio: document.getElementById('userBio').value,
+                    balance: document.getElementById('hourlyRate').value,
+                    languages: selectedLangs,
+                    mainSkill: document.getElementById('mainSkill').value,
+                    lastUpdate: new Date()
+                }, { merge: true });
+
+                alert("تم تحديث هويتك بنجاح!");
+                window.location.href = "home.html";
             } catch (err) {
                 console.error(err);
-                alert("فشلت المزامنة!");
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = `<span>اعتماد الهوية ونشرها</span> <i class="fas fa-satellite"></i>`;
+                alert("خطأ في الاتصال بقاعدة البيانات!");
+                btn.disabled = false;
+                btn.innerHTML = `<span>اعتماد وتحديث الملف العالمي</span> <i class="fas fa-check-circle text-2xl"></i>`;
             }
         });
     </script>
