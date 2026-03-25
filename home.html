@@ -11,27 +11,30 @@
 
     <style>
         :root { --red-primary: #ff1e1e; --dark-bg: #050505; --card-bg: rgba(255, 255, 255, 0.03); }
-        body { font-family: 'Tajawal', sans-serif; background-color: var(--dark-bg); color: white; }
+        body { font-family: 'Tajawal', sans-serif; background-color: var(--dark-bg); color: white; overflow-x: hidden; }
         
         .sidebar-item.active { background: linear-gradient(90deg, rgba(255,30,30,0.1) 0%, transparent 100%); border-right: 4px solid var(--red-primary); color: white; }
-        .glass-card { background: var(--card-bg); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.05); }
+        .glass-card { background: var(--card-bg); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.05); transition: 0.3s; }
+        .glass-card:hover { border-color: rgba(255, 30, 30, 0.3); transform: translateY(-2px); }
         .stat-glow { filter: drop-shadow(0 0 15px rgba(255, 30, 30, 0.3)); }
         
-        /* شاشة التحميل */
-        #loading-overlay { position: fixed; inset: 0; background: var(--dark-bg); z-index: 9999; display: flex; justify-content: center; align-items: center; }
+        #loading-overlay { position: fixed; inset: 0; background: var(--dark-bg); z-index: 9999; display: flex; justify-content: center; align-items: center; transition: 0.5s; }
         
         ::-webkit-scrollbar { width: 5px; }
         ::-webkit-scrollbar-track { background: #0a0a0a; }
         ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
     </style>
 </head>
-<body class="min-h-screen flex overflow-hidden">
+<body class="min-h-screen flex">
 
     <div id="loading-overlay">
-        <i class="fas fa-circle-notch animate-spin text-red-600 text-5xl"></i>
+        <div class="text-center">
+            <i class="fas fa-circle-notch animate-spin text-red-600 text-6xl mb-4"></i>
+            <p class="text-xs font-black tracking-widest uppercase italic text-gray-500">جاري الاتصال بـ RED WORK...</p>
+        </div>
     </div>
 
-    <aside class="w-72 border-l border-white/5 bg-black/40 hidden lg:flex flex-col py-8">
+    <aside class="w-72 border-l border-white/5 bg-black/40 hidden lg:flex flex-col py-8 sticky top-0 h-screen">
         <div class="px-8 mb-12">
             <a href="index.html" class="text-3xl font-[900] tracking-tighter text-white">
                 RED<span class="text-red-600 italic">WORK</span>
@@ -53,23 +56,23 @@
             </a>
         </nav>
         <div class="px-8 mt-auto pt-8 border-t border-white/5">
-            <button id="logoutBtn" class="flex items-center gap-4 text-gray-500 font-bold hover:text-red-500 transition">
+            <button id="logoutBtn" class="flex items-center gap-4 text-gray-500 font-bold hover:text-red-500 transition w-full text-right">
                 <i class="fas fa-sign-out-alt"></i> تسجيل الخروج
             </button>
         </div>
     </aside>
 
-    <main class="flex-1 overflow-y-auto h-screen relative">
+    <main class="flex-1 overflow-y-auto relative">
         <header class="h-20 border-b border-white/5 flex items-center justify-between px-10 sticky top-0 bg-black/20 backdrop-blur-xl z-50">
             <h2 class="text-xl font-black italic tracking-tighter text-red-600">RED DASHBOARD</h2>
             
             <div class="flex items-center gap-6">
-                <div onclick="window.location.href='profile.html'" class="flex items-center gap-3 bg-white/5 px-4 py-2 rounded-2xl border border-white/5 cursor-pointer hover:bg-white/10 transition">
+                <div onclick="window.location.href='profile.html'" class="flex items-center gap-3 bg-white/5 px-4 py-2 rounded-2xl border border-white/5 cursor-pointer hover:bg-white/10 transition group">
                     <div class="text-right">
                         <p id="userNameDisplay" class="text-xs font-black italic">جاري التحميل...</p>
                         <p class="text-[10px] text-gray-500 uppercase font-bold tracking-widest">المستوى الاحترافي</p>
                     </div>
-                    <img id="userAvatar" src="https://ui-avatars.com/api/?name=User" class="w-10 h-10 rounded-xl border border-red-600/50">
+                    <img id="userAvatar" src="https://ui-avatars.com/api/?name=User" class="w-10 h-10 rounded-xl border border-red-600/50 group-hover:border-red-600 transition">
                 </div>
             </div>
         </header>
@@ -90,7 +93,7 @@
                     <p class="text-gray-500 font-black text-xs uppercase tracking-widest italic mb-4">الرصيد المتاح</p>
                     <div>
                         <h4 id="userBalance" class="text-5xl font-[900] stat-glow italic tracking-tighter">$0.00</h4>
-                        <p class="text-green-500 text-xs font-bold mt-2">محفظة RED الحقيقية</p>
+                        <p class="text-green-500 text-xs font-bold mt-2"><i class="fas fa-shield-alt ml-1"></i> محفظة RED الحقيقية</p>
                     </div>
                 </div>
             </section>
@@ -125,23 +128,29 @@
 
         onAuthStateChanged(auth, async (user) => {
             if (user) {
-                // 1. جلب بيانات المستخدم الأساسية
-                const userRef = doc(db, "users", user.uid);
-                const userSnap = await getDoc(userRef);
+                try {
+                    // جلب بيانات المستخدم
+                    const userRef = doc(db, "users", user.uid);
+                    const userSnap = await getDoc(userRef);
 
-                if (userSnap.exists()) {
-                    const data = userSnap.data();
-                    document.getElementById('userNameDisplay').innerText = data.fullName || "مبدع مجهول";
-                    document.getElementById('welcomeName').innerText = (data.fullName || "طه").split(' ')[0];
-                    document.getElementById('userBalance').innerText = `$${data.balance || "0.00"}`;
-                    if(data.profilePic) document.getElementById('userAvatar').src = data.profilePic;
+                    if (userSnap.exists()) {
+                        const data = userSnap.data();
+                        document.getElementById('userNameDisplay').innerText = data.fullName || "مبدع مجهول";
+                        document.getElementById('welcomeName').innerText = (data.fullName || "طه").split(' ')[0];
+                        document.getElementById('userBalance').innerText = `$${Number(data.balance || 0).toLocaleString()}`;
+                        if(data.profilePic) document.getElementById('userAvatar').src = data.profilePic;
+                    }
+
+                    // جلب المشاريع
+                    await loadProjects(user.uid);
+
+                    // إخفاء التحميل
+                    document.getElementById('loading-overlay').style.opacity = '0';
+                    setTimeout(() => document.getElementById('loading-overlay').style.display = 'none', 500);
+
+                } catch (error) {
+                    console.error("Error fetching data:", error);
                 }
-
-                // 2. جلب المشاريع (مثال: مشاريع مرتبطة بـ ID المستخدم)
-                loadProjects(user.uid);
-
-                // إخفاء شاشة التحميل
-                document.getElementById('loading-overlay').style.display = 'none';
             } else {
                 window.location.href = 'login.html';
             }
@@ -149,12 +158,17 @@
 
         async function loadProjects(uid) {
             const projectsContainer = document.getElementById('projectsContainer');
-            // هنا نفترض وجود مجموعة "projects" في قاعدة البيانات
+            projectsContainer.innerHTML = ""; // تفريغ الحاوية لمنع التكرار
+
             const q = query(collection(db, "projects"), where("assignedTo", "==", uid));
             const querySnapshot = await getDocs(q);
             
             if (querySnapshot.empty) {
-                projectsContainer.innerHTML = `<p class="text-gray-500 italic p-6">لا توجد مشاريع جارية حالياً.</p>`;
+                projectsContainer.innerHTML = `
+                    <div class="glass-card p-10 rounded-[32px] text-center">
+                        <i class="fas fa-folder-open text-gray-700 text-4xl mb-4"></i>
+                        <p class="text-gray-500 italic font-bold">لا توجد مشاريع نشطة حالياً في ملفك.</p>
+                    </div>`;
                 return;
             }
 
@@ -165,17 +179,19 @@
                         <div class="flex items-center gap-5">
                             <div class="w-14 h-14 bg-red-600/20 rounded-2xl flex items-center justify-center text-red-500 text-xl italic font-black">R</div>
                             <div>
-                                <h6 class="font-black italic">${project.title}</h6>
-                                <p class="text-xs text-gray-500 font-bold italic">الحالة: ${project.status}</p>
+                                <h6 class="font-black italic">${project.title || 'مشروع جديد'}</h6>
+                                <p class="text-xs text-gray-500 font-bold italic">الحالة: <span class="text-red-500">${project.status || 'قيد المعالجة'}</span></p>
                             </div>
                         </div>
-                        <p class="text-sm font-black italic text-red-500">$${project.price}</p>
+                        <div class="text-left">
+                             <p class="text-sm font-black italic text-red-500">$${Number(project.price || 0).toLocaleString()}</p>
+                             <i class="fas fa-chevron-left text-[10px] text-gray-700 group-hover:text-red-600 transition"></i>
+                        </div>
                     </div>
                 `;
             });
         }
 
-        // تسجيل الخروج
         document.getElementById('logoutBtn').onclick = () => {
             signOut(auth).then(() => window.location.href = 'index.html');
         };
